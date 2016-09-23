@@ -1,0 +1,235 @@
+# Concierge start profile for Eclipse SmartHome
+
+# Version configuration
+-Dconcierge.version=5.0.0
+-Djetty.version=9.3.10
+-Desh.version=0.9.0.b1
+
+# uncomment to clean storage first
+-Dorg.osgi.framework.storage.clean=onFirstInit
+
+# use our own profile
+-Dorg.eclipse.concierge.profile=eclipse-smarthome
+
+# configure Concierge debug configuration
+# -Dorg.eclipse.concierge.log.enabled=true
+# -Dorg.eclipse.concierge.log.quiet=false
+# -Dorg.eclipse.concierge.log.buffersize=1000
+
+# 4=DEBUG, 3=INFO, 2=WARN, 1=ERROR, 0=NULL
+# -Dorg.eclipse.concierge.log.level=3
+# -Dorg.eclipse.concierge.debug=true
+# -Dorg.eclipse.concierge.debug.bundles=true
+# -Dorg.eclipse.concierge.debug.packages=true
+# -Dorg.eclipse.concierge.debug.services=true
+# -Dorg.eclipse.concierge.debug.classloading=true
+
+# Basic directory - Used for either standard script or when running in IDE
+-Dbase.dir=.
+
+# bundle directories
+-Dsystem.dir=${base.dir}/system
+-Dconcierge.dir=${base.dir}/bundles
+-Djetty.dir=${system.dir}/org.eclipse.jetty
+-Desh.dir=${system.dir}/org.eclipse.smarthome
+
+# OSGi properties needed for export java internal packages
+-Dorg.osgi.framework.bootdelegation=\
+   com.sun.org.apache.xerces.internal.jaxp,\
+   sun.misc,\
+   sun.reflect
+
+
+-Dorg.osgi.framework.system.packages.extra=\
+   javax.activation,\
+   javax.crypto,\
+   javax.crypto.spec,\
+   javax.inject,\
+   javax.imageio,\
+   javax.imageio.spi,\ 
+   javax.imageio.stream,\ 
+   javax.naming,\
+   javax.naming.directory,\
+   javax.naming.ldap,\
+   javax.naming.spi,\
+   javax.net,\
+   javax.net.ssl,\
+   javax.management,\
+   javax.management.modelmbean,\
+   javax.management.remote,\
+   javax.script,\
+   javax.security.auth,\
+   javax.security.auth.callback,\
+   javax.security.auth.login,\
+   javax.security.auth.spi,\ 
+   javax.security.auth.x500,\
+   javax.security.cert,\
+   javax.sql,\
+   javax.xml,\
+   javax.xml.bind,\
+   javax.xml.bind.annotation,\
+   javax.xml.bind.annotation.adapters,\
+   javax.xml.datatype,\
+   javax.xml.namespace,\
+   javax.xml.parsers,\
+   javax.xml.stream,\
+   javax.xml.transform,\
+   javax.xml.transform.dom,\
+   javax.xml.transform.sax,\
+   javax.xml.transform.stream,\
+   javax.xml.validation,\
+   javax.xml.xpath,\
+   org.ietf.jgss,\
+   org.w3c.dom,\
+   org.w3c.dom.bootstrap,\
+   org.w3c.dom.ls,\
+   org.xml.sax,\
+   org.xml.sax.helpers,\
+   sun.misc
+
+
+# OSGi shell. Toggle between concierge shell | Apache Felix GoGo
+-istart ${concierge.dir}/org.eclipse.concierge.shell-${concierge.version}*.jar
+# -istart ${system.dir}/org.apache.felix.gogo.runtime-0.*.jar
+# -istart ${system.dir}/org.apache.felix.gogo.command-0.*.jar
+# -istart ${system.dir}/org.apache.felix.gogo.shell-0.*.jar
+ 
+# Concierge extensions, services (fragment, do NOT start)
+-istart ${concierge.dir}/org.eclipse.concierge.service.permission-${concierge.version}*.jar
+-istart ${concierge.dir}/org.eclipse.concierge.service.packageadmin-${concierge.version}*.jar
+-istart ${concierge.dir}/org.eclipse.concierge.service.startlevel-${concierge.version}*.jar
+-istart ${concierge.dir}/org.eclipse.concierge.service.xmlparser-${concierge.version}*.jar
+
+# Start OSGi services
+-istart ${system.dir}/org.osgi.enterprise-*.jar
+
+# CM Configuration Admin
+-istart ${system.dir}/org.apache.felix.configadmin-1.8.8*.jar
+
+# Events
+-istart ${system.dir}/org.apache.felix.eventadmin-1.4.8*.jar
+
+# Declerativ services DS
+-istart ${system.dir}/org.apache.felix.scr-1.8.2*.jar
+
+# Enable logging. Use slf4j facade with logback backend. Install bridges for JCL, JUL and log4j
+-install ${system.dir}/slf4j-api-1.7*.jar
+-install ${system.dir}/logback-core-1.0.7*.jar
+-install ${system.dir}/logback-classic-1.0.7*.jar
+-start ${system.dir}/slf4j-api-1.7*.jar
+-start ${system.dir}/logback-core-1.0.7*.jar
+-start ${system.dir}/logback-classic-1.0.7*.jar
+
+# Add Log bridges
+-istart ${system.dir}/jcl-over-slf4j-1.7*.jar
+-istart ${system.dir}/jul-to-slf4j-1.7*.jar
+-istart ${system.dir}/osgi-over-slf4j-1.7*.jar
+-istart ${system.dir}/log4j-over-slf4j-1.7*.jar
+
+ # Enable common javax packages
+-istart ${system.dir}/javax.servlet-api-3.1*.jar
+
+ # Apache libs
+-istart ${system.dir}/commons-io-2.2*.jar
+-istart ${system.dir}/commons-lang-2.6*.jar
+-istart ${system.dir}/commons-codec-1.6*.jar
+-istart ${system.dir}/commons-exec-1.1*.jar
+-istart ${system.dir}/commons-collections-3.2*.jar
+-istart ${system.dir}/commons-logging-1.1*.jar
+
+# Other libs
+-istart ${system.dir}/com.ibm.icu.base-*.jar
+-istart ${system.dir}/org.antlr.runtime*.jar
+-istart ${system.dir}/com.google.guava*.jar
+-istart ${system.dir}/com.google.inject*.jar
+-istart ${system.dir}/gson-2.2.4*.jar
+ 
+ # Jersey (JSR-311) reference implementation for RESTful interfaces, with publisher and GSON provider
+-istart ${system.dir}/jersey-min-2.22*.jar
+-istart ${system.dir}/publisher-5.3*.jar
+-istart ${system.dir}/provider-gson-2.3*.jar
+
+# Jetty modules
+-istart ${system.dir}/servlet-1.0*.jar
+-istart ${jetty.dir}/jetty-util-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-io-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-http-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-server-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-rewrite-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-continuation-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-security-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-servlet-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-httpservice-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-xml-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-webapp-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-deploy-${jetty.version}*.jar
+-istart ${jetty.dir}/jetty-osgi-boot-${jetty.version}*.jar
+
+# HTTP client
+-istart ${system.dir}/httpcore-osgi-4.3.3*.jar
+-istart ${system.dir}/httpclient-osgi-4.3.6*.jar
+
+# Jetty Client
+-istart ${jetty.dir}/jetty-client-${jetty.version}*.jar
+
+# Persistence: MapDB
+-istart ${system.dir}/mapdb-1.0.9*.jar
+
+# jUPnP
+-istart ${system.dir}/org.jupnp-2.2.0*.jar
+
+# JmDNS
+-istart ${system.dir}/jmdns-3.5.1*.jar
+
+# Eclipse SmartHome modules
+-istart ${esh.dir}/org.eclipse.smarthome.core-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.core.autoupdate-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.config.core-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.core.persistence-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.io.console-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.io.console.rfc147-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.core.thing-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.config.discovery-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.config.xml-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.core.binding.xml-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.core.thing.xml-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.core.scheduler-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.core.transform-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.core.id-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.storage.mapdb-${esh.version}*.jar
+
+# Eclipse SmartHome IO modules
+-istart ${esh.dir}/org.eclipse.smarthome.io.rest-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.io.rest.core-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.io.rest.sse-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.io.monitor-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.io.net-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.io.transport.mdns-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.io.transport.upnp-${esh.version}*.jar
+
+# Eclipse SmartHome Automation modules
+-istart ${esh.dir}/org.eclipse.smarthome.automation.api-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.automation.commands-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.automation.core-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.automation.parser.gson-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.automation.providers-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.automation.rest-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.automation.module.core-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.automation.module.script-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.automation.module.script.defaultscope-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.automation.module.timer-${esh.version}*.jar
+
+# Eclipse SmartHome UI
+-istart ${esh.dir}/org.eclipse.smarthome.ui.paper-${esh.version}*.jar
+
+# Eclipse SmartHome Bindings. Start all bindings here
+-istart ${esh.dir}/org.eclipse.smarthome.binding.yahooweather-${esh.version}*.jar
+
+# FileInstall as last bundle to allow to install add-ons
+-istart ${system.dir}/org.apache.felix.fileinstall-3.5.0*.jar
+
+# Start webconsole for debugging
+-istart ${system.dir}/org.apache.felix.webconsole-4.2.16-all.jar
+
+
+# end of script
