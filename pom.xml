@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.eclipse.smarthome</groupId>
+    <artifactId>smarthome-packaging-sample</artifactId>
+    <version>0.9.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <name>Eclipse Smarthome Packaging Sample (Concierge)</name>
+    <description>Eclipse smarthome distribution which uses concierge OSGi container as runtime.
+    </description>
+
+    <properties>
+        <jetty.version>9.3.10.M0</jetty.version>
+        <esh.version>0.9.0.b1</esh.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.3.0</version>
+                <executions>
+                    <execution>
+                        <id>download-concierge</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>
+                                http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/concierge/download/releases/concierge-incubation-5.0.0.zip
+                            </url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${project.build.directory}/concierge</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-esh-dependencies</id>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/org.eclipse.smarthome</outputDirectory>
+                            <includeGroupIds>
+                                org.eclipse.smarthome.binding,
+                                org.eclipse.smarthome.core,
+                                org.eclipse.smarthome.config,
+                                org.eclipse.smarthome.io,
+                                org.eclipse.smarthome.automation,
+                                org.eclipse.smarthome.storage,
+                                org.eclipse.smarthome.extension,
+                                org.eclipse.smarthome.extension.ui
+                            </includeGroupIds>
+                            <ignorePermissions>true</ignorePermissions>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-jetty-dependencies</id>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/org.eclipse.jetty</outputDirectory>
+                            <includeGroupIds>org.eclipse.jetty</includeGroupIds>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/platform</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>distro-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>src/assemble/concierge.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <dependencies>
+
+        <!-- Eclipse Smarthome dependencies - CORE -->
+        <dependency>
+            <groupId>org.eclipse.smarthome.core</groupId>
+            <artifactId>org.eclipse.smarthome.core</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.core</groupId>
+            <artifactId>org.eclipse.smarthome.core.autoupdate</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.core</groupId>
+            <artifactId>org.eclipse.smarthome.core.persistence</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.core</groupId>
+            <artifactId>org.eclipse.smarthome.core.thing</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.core</groupId>
+            <artifactId>org.eclipse.smarthome.core.binding.xml</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.core</groupId>
+            <artifactId>org.eclipse.smarthome.core.thing.xml</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.core</groupId>
+            <artifactId>org.eclipse.smarthome.core.scheduler</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.core</groupId>
+            <artifactId>org.eclipse.smarthome.core.transform</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.core</groupId>
+            <artifactId>org.eclipse.smarthome.core.id</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+
+
+        <!-- Eclipse Smarthome dependencies - CONFIG -->
+        <dependency>
+            <groupId>org.eclipse.smarthome.config</groupId>
+            <artifactId>org.eclipse.smarthome.config.core</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.config</groupId>
+            <artifactId>org.eclipse.smarthome.config.discovery</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.config</groupId>
+            <artifactId>org.eclipse.smarthome.config.xml</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+
+        <!-- Eclipse Smarthome dependencies - IO -->
+        <dependency>
+            <groupId>org.eclipse.smarthome.io</groupId>
+            <artifactId>org.eclipse.smarthome.io.console</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.io</groupId>
+            <artifactId>org.eclipse.smarthome.io.console.rfc147</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.io</groupId>
+            <artifactId>org.eclipse.smarthome.io.rest</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.io</groupId>
+            <artifactId>org.eclipse.smarthome.io.rest.core</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.io</groupId>
+            <artifactId>org.eclipse.smarthome.io.rest.sse</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.io</groupId>
+            <artifactId>org.eclipse.smarthome.io.monitor</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.io</groupId>
+            <artifactId>org.eclipse.smarthome.io.net</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.io</groupId>
+            <artifactId>org.eclipse.smarthome.io.transport.upnp</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.io</groupId>
+            <artifactId>org.eclipse.smarthome.io.transport.mdns</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+
+        <!-- Eclipse Smarthome dependencies - Storage -->
+        <dependency>
+            <groupId>org.eclipse.smarthome.automation</groupId>
+            <artifactId>org.eclipse.smarthome.automation.core</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.automation</groupId>
+            <artifactId>org.eclipse.smarthome.automation.api</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.automation</groupId>
+            <artifactId>org.eclipse.smarthome.automation.commands</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.automation</groupId>
+            <artifactId>org.eclipse.smarthome.automation.providers</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.automation</groupId>
+            <artifactId>org.eclipse.smarthome.automation.parser.gson</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.automation</groupId>
+            <artifactId>org.eclipse.smarthome.automation.rest</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.automation</groupId>
+            <artifactId>org.eclipse.smarthome.automation.module.core</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.automation</groupId>
+            <artifactId>org.eclipse.smarthome.automation.module.script</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.automation</groupId>
+            <artifactId>org.eclipse.smarthome.automation.module.script.defaultscope</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.automation</groupId>
+            <artifactId>org.eclipse.smarthome.automation.module.timer</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+
+        <!-- Eclipse Smarthome dependencies - Storage -->
+        <dependency>
+            <groupId>org.eclipse.smarthome.storage</groupId>
+            <artifactId>org.eclipse.smarthome.storage.mapdb</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+
+        <!-- Eclipse Smarthome dependencies - UI -->
+        <dependency>
+            <groupId>org.eclipse.smarthome.extension.ui</groupId>
+            <artifactId>org.eclipse.smarthome.ui.paper</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+
+        <!-- Eclipse Smarthome dependencies - Bindings -->
+        <dependency>
+            <groupId>org.eclipse.smarthome.binding</groupId>
+            <artifactId>org.eclipse.smarthome.binding.yahooweather</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+
+        <!-- OSGI http services -->
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.enterprise</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+
+        <!-- Felix dependencies -->
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.fileinstall</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.configadmin</artifactId>
+            <version>1.8.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.eventadmin</artifactId>
+            <version>1.4.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr</artifactId>
+            <version>1.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.webconsole</artifactId>
+            <version>4.2.16</version>
+            <classifier>all</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.gogo.runtime</artifactId>
+            <version>0.16.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.gogo.command</artifactId>
+            <version>0.16.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.gogo.shell</artifactId>
+            <version>0.12.0</version>
+        </dependency>
+
+        <!-- Jetty dependencies -->
+        <dependency>
+            <groupId>org.eclipse.jetty.aggregate</groupId>
+            <artifactId>jetty-all</artifactId>
+            <version>${jetty.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.osgi</groupId>
+            <artifactId>jetty-osgi-boot</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.osgi</groupId>
+            <artifactId>jetty-httpservice</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-client</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+
+        <!-- Jersey -->
+        <dependency>
+            <groupId>com.eclipsesource.jaxrs</groupId>
+            <artifactId>jersey-min</artifactId>
+            <version>2.22.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eclipsesource.jaxrs</groupId>
+            <artifactId>publisher</artifactId>
+            <version>5.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eclipsesource.jaxrs</groupId>
+            <artifactId>provider-gson</artifactId>
+            <version>2.3</version>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>osgi-over-slf4j</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+
+        <!-- Commons -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-exec</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>at.bestsolution.eclipse</groupId>
+            <artifactId>com.ibm.icu.base</artifactId>
+            <version>52.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.maggu2810.p2redist</groupId>
+            <artifactId>com.google.guava</artifactId>
+            <version>10.0.1.v201203051515</version>
+        </dependency>
+        <dependency>
+            <groupId>de.maggu2810.p2redist</groupId>
+            <artifactId>com.google.inject</artifactId>
+            <version>3.0.0.v201312141243</version>
+        </dependency>
+        <dependency>
+            <groupId>de.maggu2810.p2redist</groupId>
+            <artifactId>org.antlr.runtime</artifactId>
+            <version>3.2.0.v201101311130</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr-runtime</artifactId>
+            <version>3.2</version>
+        </dependency>
+
+        <!-- Equinox http servlet -->
+        <dependency>
+            <groupId>org.eclipse.equinox.http</groupId>
+            <artifactId>servlet</artifactId>
+            <version>1.0.0-v20070606</version>
+        </dependency>
+
+        <!-- Http client -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore-osgi</artifactId>
+            <version>4.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient-osgi</artifactId>
+            <version>4.3.6</version>
+        </dependency>
+
+        <!-- MapDB -->
+        <dependency>
+            <groupId>org.mapdb</groupId>
+            <artifactId>mapdb</artifactId>
+            <version>1.0.9</version>
+        </dependency>
+
+        <!-- JmDNS -->
+        <dependency>
+            <groupId>org.jmdns</groupId>
+            <artifactId>jmdns</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+
+        <!-- jUpnp -->
+        <dependency>
+            <groupId>org.jupnp</groupId>
+            <artifactId>org.jupnp</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>osgi-bundles</id>
+            <url>https://dl.bintray.com/maggu2810/maven</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>jupnp</id>
+            <url>https://dl.bintray.com/jupnp/mvn/</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>eclipse-releases</id>
+            <name>Eclipse Snapshot Repository (Releases)</name>
+            <layout>default</layout>
+            <url>https://repo.eclipse.org/content/repositories/releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>eclipse-snapshots</id>
+            <name>Eclipse Snapshot Repository (Snapshots)</name>
+            <layout>default</layout>
+            <url>https://repo.eclipse.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+</project>

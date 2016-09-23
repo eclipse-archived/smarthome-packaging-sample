@@ -1,0 +1,14 @@
+# IntelliJ
+.idea/
+*.iml
+
+# Maven
+**/target/
+
+# Eclipse
+bin/
+classes/
+out/
+**/.sonar_lock
+
+dependency-reduced-pom.xml
