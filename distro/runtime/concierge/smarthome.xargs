@@ -175,10 +175,10 @@
 # Persistence: MapDB
 -istart ${system.dir}/mapdb-1.0.9*.jar
 
-# jUPNP
+# jUPnP
 -istart ${system.dir}/org.jupnp-2.2.0*.jar
 
-# jMDNS
+# JmDNS
 -istart ${system.dir}/jmdns-3.5.1*.jar
 
 # Eclipse SmartHome modules
