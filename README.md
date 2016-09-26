@@ -52,9 +52,16 @@ You can find the created distribution under **/target/smarthome-packaging-sample
 Extract the distribution zip file and start the runtime:
 ```
 unzip smarthome-packaging-sample-[version].zip
-cd runtime/concierge
 ./start.sh
 ```
+
+5. Using the UI
+================
+The distribution already includes the PaperUI. 
+Goto: **http://your-host:8080/** you will redirected to **/ui/index.html**
+
+Also included is the Apache Felix Web Console. The Apache Felix Web Console is a simple tool to inspect and manage OSGi framework
+Goto: **http://your-host:8080/system/console/**
 
 Customize the distribution
 ================
@@ -108,3 +115,9 @@ At next startup you will see the **g!** prompt instead of **concierge>**
 
 ## Passing own options to JVM
 You can use `JAVA_OPTS` for passing own parameter to JVM e.g. the Java Heap size etc.
+
+Limitations
+================
+It's not possible to run XText under concierge due to dependencies on equinox runtime. 
+For this reason all modeling packages have been removed from this distribution. 
+There are no .items, .rule, .thing, etc. files. Try to use new generation rule engine to manage rules.
