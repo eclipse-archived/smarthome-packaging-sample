@@ -49,5 +49,3 @@ java $JAVA_OPTS \
 	-Djava.awt.headless=true \
 	-Dfile.encoding="UTF-8" \
 	-jar $MAIN $DIRNAME/smarthome.xargs
-
-
