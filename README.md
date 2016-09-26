@@ -1,7 +1,7 @@
 # Eclipse SmartHome Packaging Sample
 <img src="https://www.eclipse.org/concierge/images/logo.png" alt="concierge osgi" width="200"/>
 
-This repository contains a sample project which wraps Eclipse SmartHome within a concierge OSGi container, a lightweight OSGi R5 implementation.
+This repo contains a sample of how to create a small working runtime package that uses the Eclipse SmartHome framework.
 You can use this example to build an own minimal distribution with a very optimized memory footprint.
 
 More information about concierge: https://www.eclipse.org/concierge/index.php
