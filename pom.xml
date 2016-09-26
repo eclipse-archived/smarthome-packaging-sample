@@ -9,8 +9,8 @@
 
     <packaging>pom</packaging>
 
-    <name>Eclipse Smarthome Packaging Sample (Concierge)</name>
-    <description>Eclipse smarthome distribution which uses concierge OSGi container as runtime.
+    <name>Eclipse SmartHome Packaging Sample (Concierge)</name>
+    <description>Eclipse SmartHome distribution which uses concierge OSGi container as runtime.
     </description>
 
     <properties>

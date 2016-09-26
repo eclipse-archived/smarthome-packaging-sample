@@ -95,7 +95,6 @@
 # -istart ${system.dir}/org.apache.felix.gogo.shell-0.*.jar
  
 # Concierge extensions, services (fragment, do NOT start)
-#-install ${concierge.dir}/org.eclipse.concierge.extension.permission-${concierge.version}*.jar
 -istart ${concierge.dir}/org.eclipse.concierge.service.permission-${concierge.version}*.jar
 -istart ${concierge.dir}/org.eclipse.concierge.service.packageadmin-${concierge.version}*.jar
 -istart ${concierge.dir}/org.eclipse.concierge.service.startlevel-${concierge.version}*.jar
