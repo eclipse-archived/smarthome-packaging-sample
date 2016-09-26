@@ -182,7 +182,7 @@
 # jMDNS
 -istart ${system.dir}/jmdns-3.5.1*.jar
 
-# Eclipse Smarthome modules
+# Eclipse SmartHome modules
 -istart ${esh.dir}/org.eclipse.smarthome.core-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.core.autoupdate-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.config.core-${esh.version}*.jar
@@ -199,7 +199,7 @@
 -istart ${esh.dir}/org.eclipse.smarthome.core.id-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.storage.mapdb-${esh.version}*.jar
 
-# Eclipse Smarthome IO modules
+# Eclipse SmartHome IO modules
 -istart ${esh.dir}/org.eclipse.smarthome.io.rest-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.io.rest.core-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.io.rest.sse-${esh.version}*.jar
@@ -208,7 +208,7 @@
 -istart ${esh.dir}/org.eclipse.smarthome.io.transport.mdns-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.io.transport.upnp-${esh.version}*.jar
 
-# Eclipse Smarthome Automation modules
+# Eclipse SmartHome Automation modules
 -istart ${esh.dir}/org.eclipse.smarthome.automation.api-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.automation.commands-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.automation.core-${esh.version}*.jar
@@ -220,10 +220,10 @@
 -istart ${esh.dir}/org.eclipse.smarthome.automation.module.script.defaultscope-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.automation.module.timer-${esh.version}*.jar
 
-# Eclipse Smarthome UI
+# Eclipse SmartHome UI
 -istart ${esh.dir}/org.eclipse.smarthome.ui.paper-${esh.version}*.jar
 
-# Eclipse Smarthome Bindings. Start all bindings here
+# Eclipse SmartHome Bindings. Start all bindings here
 -istart ${esh.dir}/org.eclipse.smarthome.binding.yahooweather-${esh.version}*.jar
 
 # FileInstall as last bundle to allow to install add-ons

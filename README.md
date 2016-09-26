@@ -1,14 +1,16 @@
-# Eclipse Smarthome Packaging Sample
+# Eclipse SmartHome Packaging Sample
 <img src="https://www.eclipse.org/concierge/images/logo.png" alt="concierge osgi" width="200"/>
 
-This repository contains a sample project which wraps eclipse smarthome within a concierge OSGi container, a lightweight OSGi R5 implementation. You can use this example to build an own minimal distribution with a very optimized memory footprint.
+This repository contains a sample project which wraps Eclipse SmartHome within a concierge OSGi container, a lightweight OSGi R5 implementation.
+You can use this example to build an own minimal distribution with a very optimized memory footprint.
 
 More information about concierge: https://www.eclipse.org/concierge/index.php
 
 1. Prerequisites - Install Maven
 ================
 Please use the instructions on main project's readme to install maven: https://github.com/eclipse/smarthome#1-prerequisites
-Make sure **mvn** command is available on your path.
+* Make sure **mvn** command is available on your path.
+* Make sure you're using a **JDK 8**.
 
 2. Checkout
 ================
@@ -27,7 +29,7 @@ mvn clean install
 
 The maven build will create an ZIP file with all required components like
 * the concierge runtime
-* eclipse smarthome bundles
+* Eclipse SmartHome bundles
 * 3rd party bundles
 * start scripts
 
@@ -41,7 +43,7 @@ You can find the created distribution under **/target/smarthome-packaging-sample
     * **framework**: The Framework
     * **system**: Contains commons and 3rd party bundles
       * **org.eclipse.jetty**: All jetty bundles
-      * **org.eclipse.smarthome**: All smarthome bundles
+      * **org.eclipse.smarthome**: All SmartHome bundles
  * **etc**: Quartz configuration, Jetty configuration, keystore
 * **userdata**: This folder is created during the first startup and contains persistent userdata and the osgi storage.
 
@@ -71,7 +73,7 @@ See for more details: https://www.eclipse.org/concierge/documentation.php#basic
 ## How to add further bundles?
 1. Add your bundle as dependecy in the pom.xml. For example:
 ```
-  <!-- Eclipse Smarthome dependencies - Bindings -->
+  <!-- Eclipse SmartHome dependencies - Bindings -->
         <dependency>
             <groupId>org.eclipse.smarthome.binding</groupId>
             <artifactId>org.eclipse.smarthome.binding.wemo</artifactId>
@@ -80,7 +82,7 @@ See for more details: https://www.eclipse.org/concierge/documentation.php#basic
 ```
 2. Add the install and startup command to XARGS file. For example:
 ```
-# Eclipse Smarthome Bindings. Start all bindings here
+# Eclipse SmartHome Bindings. Start all bindings here
 -istart ${esh.dir}/org.eclipse.smarthome.binding.wemo-${esh.version}*.jar
 ```
 

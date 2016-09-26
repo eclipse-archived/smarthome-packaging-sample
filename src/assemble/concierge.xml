@@ -55,7 +55,7 @@
             </excludes>
         </fileSet>
 
-        <!-- include eclipse smarthome modules -->
+        <!-- include Eclipse SmartHome modules -->
         <fileSet>
             <directory>${project.build.directory}/org.eclipse.smarthome/</directory>
             <outputDirectory>runtime/concierge/system/org.eclipse.smarthome/</outputDirectory>
