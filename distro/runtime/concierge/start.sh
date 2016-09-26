@@ -15,6 +15,14 @@ if [ "x$HTTPS_PORT" = "x" ]; then
     HTTPS_PORT="8443"
 fi
 
+# Check Java version. Make sure java command is available
+echo "Using java: $JAVA_HOME" && `java -version`
+VERSION=`java -version 2>&1  | egrep '"([0-9].[0-9]\..*[0-9]).*"' | awk '{print substr($3,2,length($3)-2)}' | awk '{print substr($1, 3, 3)}' | sed -e 's;\.;;g'`
+if [ "$VERSION" -lt "80" ]; then
+   echo "ERROR: JVM must be greater than 1.7"
+   exit 1;
+fi
+
 # Find the concierge framework jar
 MAIN=$(find framework -name "org.eclipse.concierge-5.0.0*.jar" | sort | tail -1);
 
