@@ -58,7 +58,7 @@ unzip smarthome-packaging-sample-[version].zip
 5. Using the UI
 ================
 The distribution already includes the PaperUI. 
-Goto: **http://your-host:8080/** you will redirected to **/ui/index.html**
+Goto: **http://your-host:8080/** you will be redirected to **/ui/index.html**
 
 Also included is the Apache Felix Web Console. The Apache Felix Web Console is a simple tool to inspect and manage OSGi framework
 Goto: **http://your-host:8080/system/console/**
