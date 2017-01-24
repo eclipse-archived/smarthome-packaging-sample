@@ -1,3 +1,3 @@
 #!/bin/sh
 # Launch concierge runtime
-cd runtime/concierge && ./start.sh
+cd runtime/concierge && ./start.sh "${@}"

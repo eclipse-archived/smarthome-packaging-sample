@@ -49,11 +49,30 @@ You can find the created distribution under **/target/smarthome-packaging-sample
 
 4. Start runtime
 ================
+
+The minimum requirement for running this distribution is:
+
+* JavaSE 8, JavaSE Embedded 8, or Azul Zulu-Embedded 8
+* When running embedded profiles: at least compact 2 profile
+
+
 Extract the distribution zip file and start the runtime:
 ```
 unzip smarthome-packaging-sample-[version].zip
 ./start.sh
 ```
+
+If you are developing, you can start the distribution with
+
+```
+./start_debug.sh
+```
+
+which will
+* enable debugger on port 5005
+* enable JMX (at least when running on JavaSE compact 3 profile)
+* enable Java Flight Recorder (JFR) when running on Oracle JVM and JFR is installed in JVM
+* provide extended logging output for diagnostic purposes
 
 5. Using the UI
 ================
@@ -118,6 +137,13 @@ You can use `JAVA_OPTS` for passing own parameter to JVM e.g. the Java Heap size
 
 Limitations
 ================
-It's not possible to run XText under concierge due to dependencies on equinox runtime. 
+
+* It's not possible to run XText under concierge due to dependencies on equinox runtime. 
 For this reason all modeling packages have been removed from this distribution. 
 There are no .items, .rule, .thing, etc. files. Try to use new generation rule engine to manage rules.
+* The current distribution does not run on JavaSE compact 2/3 profiles, as
+  * logback-1.1.7 requires at least compact 3
+  * org.eclipse.smarthome.core.scheduler requires quartz, which requires Full-JRE
+  * Same for org.eclipse.smarthome.automation.scheduler
+  * The packaged Jersey-min implementation requires JAXB, which requires Full-JRE
+
