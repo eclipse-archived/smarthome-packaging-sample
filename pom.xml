@@ -228,7 +228,7 @@
             <version>${esh.version}</version>
         </dependency>
 
-        <!-- Eclipse Smarthome dependencies - Storage -->
+        <!-- Eclipse Smarthome dependencies - Automation -->
         <dependency>
             <groupId>org.eclipse.smarthome.automation</groupId>
             <artifactId>org.eclipse.smarthome.automation.core</artifactId>
