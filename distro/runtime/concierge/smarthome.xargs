@@ -3,7 +3,7 @@
 # Version configuration
 -Dconcierge.version=5.0.0
 -Djetty.version=9.3.10
--Desh.version=0.9.0.b1
+-Desh.version=0.9.0.b4
 
 # uncomment to clean storage first
 -Dorg.osgi.framework.storage.clean=onFirstInit
@@ -23,6 +23,7 @@
 # -Dorg.eclipse.concierge.debug.packages=true
 # -Dorg.eclipse.concierge.debug.services=true
 # -Dorg.eclipse.concierge.debug.classloading=true
+# -Dorg.eclipse.concierge.debug.resolver=true
 
 # Basic directory - Used for either standard script or when running in IDE
 -Dbase.dir=.
@@ -95,30 +96,33 @@
 # -istart ${system.dir}/org.apache.felix.gogo.shell-0.*.jar
  
 # Concierge extensions, services (fragment, do NOT start)
--istart ${concierge.dir}/org.eclipse.concierge.service.permission-${concierge.version}*.jar
 -istart ${concierge.dir}/org.eclipse.concierge.service.packageadmin-${concierge.version}*.jar
 -istart ${concierge.dir}/org.eclipse.concierge.service.startlevel-${concierge.version}*.jar
 -istart ${concierge.dir}/org.eclipse.concierge.service.xmlparser-${concierge.version}*.jar
 
-# Start OSGi services
--istart ${system.dir}/org.osgi.enterprise-*.jar
+# Metatype Service
+-istart ${system.dir}/org.apache.felix.metatype-1.1.2*.jar
 
 # CM Configuration Admin
--istart ${system.dir}/org.apache.felix.configadmin-1.8.8*.jar
+-istart ${system.dir}/org.apache.felix.configadmin-1.8.*.jar
 
 # Events
 -istart ${system.dir}/org.apache.felix.eventadmin-1.4.8*.jar
 
 # Declerativ services DS
--istart ${system.dir}/org.apache.felix.scr-1.8.2*.jar
+-istart ${system.dir}/org.apache.felix.scr-1.8.*.jar
+
+# OSGi Http Service
+-istart ${system.dir}/org.apache.felix.http.servlet-api-1.1.2*.jar
+-istart ${system.dir}/org.osgi.service.http-1.2.1*.jar
 
 # Enable logging. Use slf4j facade with logback backend. Install bridges for JCL, JUL and log4j
 -install ${system.dir}/slf4j-api-1.7*.jar
--install ${system.dir}/logback-core-1.0.7*.jar
--install ${system.dir}/logback-classic-1.0.7*.jar
+-install ${system.dir}/logback-core-1.1.7*.jar
+-install ${system.dir}/logback-classic-1.1.7*.jar
 -start ${system.dir}/slf4j-api-1.7*.jar
--start ${system.dir}/logback-core-1.0.7*.jar
--start ${system.dir}/logback-classic-1.0.7*.jar
+-start ${system.dir}/logback-core-1.1.7*.jar
+-start ${system.dir}/logback-classic-1.1.7*.jar
 
 # Add Log bridges
 -istart ${system.dir}/jcl-over-slf4j-1.7*.jar
@@ -198,6 +202,10 @@
 -istart ${esh.dir}/org.eclipse.smarthome.core.id-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.storage.mapdb-${esh.version}*.jar
 
+# Eclipse SmartHome Audio/Voice
+-istart ${esh.dir}/org.eclipse.smarthome.core.audio-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.core.voice-${esh.version}*.jar
+
 # Eclipse SmartHome IO modules
 -istart ${esh.dir}/org.eclipse.smarthome.io.rest-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.io.rest.core-${esh.version}*.jar
@@ -225,11 +233,16 @@
 # Eclipse SmartHome Bindings. Start all bindings here
 -istart ${esh.dir}/org.eclipse.smarthome.binding.yahooweather-${esh.version}*.jar
 
-# FileInstall as last bundle to allow to install add-ons
--istart ${system.dir}/org.apache.felix.fileinstall-3.5.0*.jar
+# Eclipse SmartHome Console extensions
+-istart ${esh.dir}/org.eclipse.smarthome.io.console-${esh.version}*.jar
+
+# Config Dispatch
+-istart ${esh.dir}/org.eclipse.smarthome.config.dispatch-${esh.version}*.jar
 
 # Start webconsole for debugging
 -istart ${system.dir}/org.apache.felix.webconsole-4.2.16-all.jar
 
+# FileInstall as last bundle to allow to install add-ons
+-istart ${system.dir}/org.apache.felix.fileinstall-3.5.0*.jar
 
 # end of script

@@ -46,7 +46,10 @@
             <fileMode>0644</fileMode>
             <directoryMode>0755</directoryMode>
             <includes>
-                <include>bundles/*.jar</include>
+                <include>bundles/org.eclipse.concierge.service.packageadmin*.jar</include>
+                <include>bundles/org.eclipse.concierge.service.startlevel*.jar</include>
+                <include>bundles/org.eclipse.concierge.service.xmlparser*.jar</include>
+                <include>bundles/org.eclipse.concierge.shell*.jar</include>
                 <include>framework/*.jar</include>
                 <include>*.html</include>
             </includes>
@@ -75,7 +78,7 @@
             <fileMode>0644</fileMode>
 
             <includes>
-                <include>org.osgi.enterprise-*</include>
+                <include>org.osgi.service.http-*</include>
 
                 <!-- Logging -->
                 <include>*slf4j*-*</include>
@@ -104,6 +107,8 @@
                 <include>org.apache.felix.configadmin*</include>
                 <include>org.apache.felix.scr*</include>
                 <include>org.apache.felix.eventadmin*</include>
+                <include>org.apache.felix.metatype*</include>
+                <include>org.apache.felix.http*</include>
                 <include>org.apache.felix.webconsole-4.2*</include>
 
                 <!-- Apache GoGo console -->
