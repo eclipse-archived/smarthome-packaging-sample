@@ -90,6 +90,10 @@ setFlightRecorderOptions() {
                  JFR_OPTS="$JFR_OPTS -XX:+UnlockCommercialFeatures -XX:+FlightRecorder"
                  # by default, start recording for 5 min, put to userdata folder
                  JFR_OPTS="$JFR_OPTS -XX:StartFlightRecording=duration=300s,filename=$BASE_FOLDER/userdata/smarthome-concierge.jfr"
+                 # create userdata folder if not there, otherwise JFR is not able to create files during startup
+                 if [ ! -d $BASE_FOLDER/userdata ] ; then
+                     mkdir -p $BASE_FOLDER/userdata
+                 fi
             fi
        fi
     fi
@@ -126,11 +130,17 @@ setDebugOptions() {
             JAVA_DEBUG_OPTS="$JAVA_DEBUG_OPTS $DEFAULT_JAVA_DEBUG_OPTS"
         fi
 
-        # chatty logging setttings
-        JAVA_DEBUG_OPTS="$JAVA_DEBUG_OPTS -Dlogback.configurationFile=$RUNTIME_FOLDER/etc/logback_debug.xml"
+        # chatty logging setttings using java.util.logging
+        JAVA_DEBUG_OPTS="$JAVA_DEBUG_OPTS -Djava.util.logging.config.file=$RUNTIME_FOLDER/etc/logging_debug.properties"
     else
-        # more silent logging setttings
-        JAVA_DEBUG_OPTS="$JAVA_DEBUG_OPTS -Dlogback.configurationFile=$RUNTIME_FOLDER/etc/logback.xml"
+        # more silent logging setttings using java.util.logging
+        JAVA_DEBUG_OPTS="$JAVA_DEBUG_OPTS -Djava.util.logging.config.file=$RUNTIME_FOLDER/etc/logging.properties"
+    fi
+    # create logs directory if not yet there
+    # see http://bugs.java.com/bugdatabase/view_bug.do?bug_id=6244047
+    # see https://bugs.openjdk.java.net/browse/JDK-8153955
+    if [ ! -d $BASE_FOLDER/userdata/logs ] ; then
+        mkdir -p $BASE_FOLDER/userdata/logs
     fi
 }
 

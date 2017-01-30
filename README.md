@@ -49,6 +49,13 @@ You can find the created distribution under **/target/smarthome-packaging-sample
 
 4. Start runtime
 ================
+
+The minimum requirement for running this distribution is:
+* JavaSE 8, or JavaSE Embedded 8, or Azul Zulu-Embedded 8
+* At the moment a Full-JRE is required as few bundles have dependencies to it.
+* It is planned to run this distribution on JavaSE 8 compact 2 profile
+
+
 Extract the distribution zip file and start the runtime:
 ```
 unzip smarthome-packaging-sample-[version].zip
@@ -115,6 +122,14 @@ At next startup you will see the **g!** prompt instead of **concierge>**
 
 ## Passing own options to JVM
 You can use `JAVA_OPTS` for passing own parameter to JVM e.g. the Java Heap size etc.
+
+
+## Changing Logging backend
+
+This distribution uses java.util.logging (JUL) as logging backend to put all logging information to files or console. This is the most resource effective solution, as it only requires a bridge from slf4j to JUL (size about 8 kB).
+
+If you want to change the logging to another backend, e.g. logback, read [here](Logging.md) for more information.
+
 
 Limitations
 ================
