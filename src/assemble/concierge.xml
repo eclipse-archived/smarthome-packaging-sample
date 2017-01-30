@@ -82,7 +82,6 @@
 
                 <!-- Logging -->
                 <include>*slf4j*-*</include>
-                <include>logback*</include>
                 <include>pax-*</include>
 
                 <!-- Servlet -->

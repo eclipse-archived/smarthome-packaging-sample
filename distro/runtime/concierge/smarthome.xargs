@@ -95,7 +95,7 @@
 # -istart ${system.dir}/org.apache.felix.gogo.command-0.*.jar
 # -istart ${system.dir}/org.apache.felix.gogo.shell-0.*.jar
  
-# Concierge extensions, services (fragment, do NOT start)
+# Concierge services
 -istart ${concierge.dir}/org.eclipse.concierge.service.packageadmin-${concierge.version}*.jar
 -istart ${concierge.dir}/org.eclipse.concierge.service.startlevel-${concierge.version}*.jar
 -istart ${concierge.dir}/org.eclipse.concierge.service.xmlparser-${concierge.version}*.jar
@@ -116,17 +116,12 @@
 -istart ${system.dir}/org.apache.felix.http.servlet-api-1.1.2*.jar
 -istart ${system.dir}/org.osgi.service.http-1.2.1*.jar
 
-# Enable logging. Use slf4j facade with logback backend. Install bridges for JCL, JUL and log4j
+# Enable logging
 -install ${system.dir}/slf4j-api-1.7*.jar
--install ${system.dir}/logback-core-1.1.7*.jar
--install ${system.dir}/logback-classic-1.1.7*.jar
+-install ${system.dir}/slf4j-jdk14-1.7*.jar
 -start ${system.dir}/slf4j-api-1.7*.jar
--start ${system.dir}/logback-core-1.1.7*.jar
--start ${system.dir}/logback-classic-1.1.7*.jar
-
-# Add Log bridges
+# Install bridges for JCL, OSGi and log4j
 -istart ${system.dir}/jcl-over-slf4j-1.7*.jar
--istart ${system.dir}/jul-to-slf4j-1.7*.jar
 -istart ${system.dir}/osgi-over-slf4j-1.7*.jar
 -istart ${system.dir}/log4j-over-slf4j-1.7*.jar
 
