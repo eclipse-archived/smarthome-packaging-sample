@@ -51,8 +51,7 @@ JAVA_DEBUG_OPTS="$JAVA_DEBUG_OPTS -Dlogback.configurationFile=$RUNTIME_FOLDER/et
 ```
 
 * Change `runtime/concierge/smarthome.xargs`file to include the required logback bundles
-  * Use `logback-core-<version>.jar`, `logback-classic-<version>.jar` 
-  `slf4j-jdk14-<version>.jar` as bridge from slf4j to JUL backend
+  * Use `logback-core-<version>.jar`, `logback-classic-<version>.jar` as bridge from slf4j to JUL backend
   * include the jul-to-slf4j bridge to forward java.util.logging to slf4j
 
 ```
