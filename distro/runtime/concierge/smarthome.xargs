@@ -38,7 +38,8 @@
 -Dorg.osgi.framework.bootdelegation=\
    com.sun.org.apache.xerces.internal.jaxp,\
    sun.misc,\
-   sun.reflect
+   sun.reflect,\
+   javax.script
 
 
 -Dorg.osgi.framework.system.packages.extra=\
