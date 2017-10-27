@@ -14,8 +14,8 @@
     </description>
 
     <properties>
-        <jetty.version>9.3.10.M0</jetty.version>
-        <esh.version>0.9.0.b4</esh.version>
+        <jetty.version>9.3.21.v20170918</jetty.version>
+        <esh.version>0.9.0.b6</esh.version>
     </properties>
 
     <build>
@@ -58,6 +58,7 @@
                                 org.eclipse.smarthome.binding,
                                 org.eclipse.smarthome.core,
                                 org.eclipse.smarthome.config,
+                                org.eclipse.smarthome.extensionservice,
                                 org.eclipse.smarthome.io,
                                 org.eclipse.smarthome.automation,
                                 org.eclipse.smarthome.storage,
@@ -299,7 +300,7 @@
         <!-- Eclipse Smarthome dependencies - Storage -->
         <dependency>
             <groupId>org.eclipse.smarthome.storage</groupId>
-            <artifactId>org.eclipse.smarthome.storage.mapdb</artifactId>
+            <artifactId>org.eclipse.smarthome.storage.json</artifactId>
             <version>${esh.version}</version>
         </dependency>
 
@@ -310,10 +311,15 @@
             <version>${esh.version}</version>
         </dependency>
 
-        <!-- Eclipse Smarthome dependencies - Bindings -->
+        <!-- Eclipse Smarthome dependencies - IoT Market -->
         <dependency>
-            <groupId>org.eclipse.smarthome.binding</groupId>
-            <artifactId>org.eclipse.smarthome.binding.yahooweather</artifactId>
+            <groupId>org.eclipse.smarthome.extensionservice</groupId>
+            <artifactId>org.eclipse.smarthome.extensionservice.marketplace</artifactId>
+            <version>${esh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.smarthome.extensionservice</groupId>
+            <artifactId>org.eclipse.smarthome.extensionservice.marketplace.automation</artifactId>
             <version>${esh.version}</version>
         </dependency>
 
@@ -532,18 +538,11 @@
             <version>4.3.6</version>
         </dependency>
 
-        <!-- MapDB -->
-        <dependency>
-            <groupId>org.mapdb</groupId>
-            <artifactId>mapdb</artifactId>
-            <version>1.0.9</version>
-        </dependency>
-
         <!-- JmDNS -->
         <dependency>
             <groupId>org.jmdns</groupId>
             <artifactId>jmdns</artifactId>
-            <version>3.5.1</version>
+            <version>3.5.3</version>
         </dependency>
 
         <!-- jUpnp -->

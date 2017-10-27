@@ -2,8 +2,8 @@
 
 # Version configuration
 -Dconcierge.version=5.0.0
--Djetty.version=9.3.10
--Desh.version=0.9.0.b4
+-Djetty.version=9.3.21
+-Desh.version=0.9.0.b6
 
 # uncomment to clean storage first
 -Dorg.osgi.framework.storage.clean=onFirstInit
@@ -110,8 +110,8 @@
 # Events
 -istart ${system.dir}/org.apache.felix.eventadmin-1.4.8*.jar
 
-# Declerativ services DS
--istart ${system.dir}/org.apache.felix.scr-1.8.*.jar
+# Declarative services DS
+-istart ${system.dir}/org.apache.felix.scr-1.8.2*.jar
 
 # OSGi Http Service
 -istart ${system.dir}/org.apache.felix.http.servlet-api-1.1.2*.jar
@@ -172,14 +172,11 @@
 # Jetty Client
 -istart ${jetty.dir}/jetty-client-${jetty.version}*.jar
 
-# Persistence: MapDB
--istart ${system.dir}/mapdb-1.0.9*.jar
-
-# jUPnP
+# jUPNP
 -istart ${system.dir}/org.jupnp-2.2.0*.jar
 
-# JmDNS
--istart ${system.dir}/jmdns-3.5.1*.jar
+# jMDNS
+-istart ${system.dir}/jmdns-3.5.3*.jar
 
 # Eclipse SmartHome modules
 -istart ${esh.dir}/org.eclipse.smarthome.core-${esh.version}*.jar
@@ -196,7 +193,7 @@
 -istart ${esh.dir}/org.eclipse.smarthome.core.scheduler-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.core.transform-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.core.id-${esh.version}*.jar
--istart ${esh.dir}/org.eclipse.smarthome.storage.mapdb-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.storage.json-${esh.version}*.jar
 
 # Eclipse SmartHome Audio/Voice
 -istart ${esh.dir}/org.eclipse.smarthome.core.audio-${esh.version}*.jar
@@ -216,18 +213,20 @@
 -istart ${esh.dir}/org.eclipse.smarthome.automation.commands-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.automation.core-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.automation.parser.gson-${esh.version}*.jar
--istart ${esh.dir}/org.eclipse.smarthome.automation.providers-${esh.version}*.jar
+-install ${esh.dir}/org.eclipse.smarthome.automation.providers-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.automation.rest-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.automation.module.core-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.automation.module.script-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.automation.module.script.defaultscope-${esh.version}*.jar
 -istart ${esh.dir}/org.eclipse.smarthome.automation.module.timer-${esh.version}*.jar
+-start ${esh.dir}/org.eclipse.smarthome.automation.providers-${esh.version}*.jar
 
 # Eclipse SmartHome UI
 -istart ${esh.dir}/org.eclipse.smarthome.ui.paper-${esh.version}*.jar
 
-# Eclipse SmartHome Bindings. Start all bindings here
--istart ${esh.dir}/org.eclipse.smarthome.binding.yahooweather-${esh.version}*.jar
+# Eclipse Smarthome IoT Market
+-istart ${esh.dir}/org.eclipse.smarthome.extensionservice.marketplace-${esh.version}*.jar
+-istart ${esh.dir}/org.eclipse.smarthome.extensionservice.marketplace.automation-${esh.version}*.jar
 
 # Eclipse SmartHome Console extensions
 -istart ${esh.dir}/org.eclipse.smarthome.io.console-${esh.version}*.jar
