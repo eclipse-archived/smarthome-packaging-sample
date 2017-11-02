@@ -526,18 +526,6 @@
             <version>1.0.0-v20070606</version>
         </dependency>
 
-        <!-- Http client -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore-osgi</artifactId>
-            <version>4.3.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient-osgi</artifactId>
-            <version>4.3.6</version>
-        </dependency>
-
         <!-- JmDNS -->
         <dependency>
             <groupId>org.jmdns</groupId>
@@ -545,11 +533,11 @@
             <version>3.5.3</version>
         </dependency>
 
-        <!-- jUpnp -->
+        <!-- jUPnP -->
         <dependency>
             <groupId>org.jupnp</groupId>
             <artifactId>org.jupnp</artifactId>
-            <version>2.2.0</version>
+            <version>2.3.0</version>
         </dependency>
     </dependencies>
 
@@ -557,11 +545,6 @@
         <repository>
             <id>osgi-bundles</id>
             <url>https://dl.bintray.com/maggu2810/maven</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <id>jupnp</id>
-            <url>https://dl.bintray.com/jupnp/mvn/</url>
             <layout>default</layout>
         </repository>
         <repository>
