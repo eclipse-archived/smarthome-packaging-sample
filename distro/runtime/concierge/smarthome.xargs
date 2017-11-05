@@ -165,15 +165,11 @@
 -istart ${jetty.dir}/jetty-deploy-${jetty.version}*.jar
 -istart ${jetty.dir}/jetty-osgi-boot-${jetty.version}*.jar
 
-# HTTP client
--istart ${system.dir}/httpcore-osgi-4.3.3*.jar
--istart ${system.dir}/httpclient-osgi-4.3.6*.jar
-
 # Jetty Client
 -istart ${jetty.dir}/jetty-client-${jetty.version}*.jar
 
 # jUPNP
--istart ${system.dir}/org.jupnp-2.2.0*.jar
+-istart ${system.dir}/org.jupnp-2.3.0*.jar
 
 # jMDNS
 -istart ${system.dir}/jmdns-3.5.3*.jar
