@@ -3,7 +3,7 @@
 # Version configuration
 -Dconcierge.version=5.0.0
 -Djetty.version=9.3.21
--Desh.version=0.9.0.b6
+-Desh.version=0.9.0
 
 # uncomment to clean storage first
 -Dorg.osgi.framework.storage.clean=onFirstInit
