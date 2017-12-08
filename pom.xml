@@ -15,7 +15,7 @@
 
     <properties>
         <jetty.version>9.3.21.v20170918</jetty.version>
-        <esh.version>0.9.0.b6</esh.version>
+        <esh.version>0.9.0</esh.version>
     </properties>
 
     <build>
