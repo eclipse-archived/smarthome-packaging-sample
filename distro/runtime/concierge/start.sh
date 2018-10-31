@@ -46,7 +46,7 @@ findJvmVersion() {
     echo "Using java: $JAVA_BIN"
     echo "$JAVA_VERSION_OUTPUT"
 
-    JAVA_VERSION=`echo $JAVA_VERSION_OUTPUT | egrep '"([0-9].[0-9]\..*[0-9]).*"' | awk '{print substr($3,2,length($3)-2)}' | awk '{print substr($1, 3, 3)}' | sed -e 's;\.;;g'`
+    JAVA_VERSION=`echo $JAVA_VERSION_OUTPUT | egrep '"([0-9]{1,2}.[0-9]\.(.*[0-9])?).*"' | awk '{print substr($3,2,length($3)-2)}' | sed -e 's;\.;;g'`
     # get information about compact profile (1/2/3/fulljre) and Vendor (Oracle, Azul)
     JAVA_COMPACT_PROFILE="fulljre"
     JAVA_VENDOR="Oracle"
