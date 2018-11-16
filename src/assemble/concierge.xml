@@ -40,22 +40,26 @@
 
         <!-- include concierge -->
         <fileSet>
-            <directory>${project.build.directory}/concierge/concierge-incubation-5.0.0/</directory>
+            <directory>${project.build.directory}/concierge/concierge-incubation-5.1.0/</directory>
             <outputDirectory>runtime/concierge</outputDirectory>
             <filtered>false</filtered>
             <fileMode>0644</fileMode>
             <directoryMode>0755</directoryMode>
             <includes>
-                <include>bundles/org.eclipse.concierge.service.packageadmin*.jar</include>
-                <include>bundles/org.eclipse.concierge.service.startlevel*.jar</include>
-                <include>bundles/org.eclipse.concierge.service.xmlparser*.jar</include>
-                <include>bundles/org.eclipse.concierge.shell*.jar</include>
-                <include>framework/*.jar</include>
                 <include>*.html</include>
             </includes>
-            <excludes>
-                <exclude>framework/*-nodebug.jar</exclude>
-            </excludes>
+        </fileSet>
+
+        <!-- include Eclipse Concierge bundles -->
+        <fileSet>
+            <directory>${project.build.directory}/org.eclipse.concierge/</directory>
+            <outputDirectory>runtime/concierge/system/org.eclipse.concierge/</outputDirectory>
+            <filtered>false</filtered>
+            <fileMode>0644</fileMode>
+            <directoryMode>0755</directoryMode>
+            <includes>
+                <include>*.jar</include>
+            </includes>
         </fileSet>
 
         <!-- include Eclipse SmartHome modules -->

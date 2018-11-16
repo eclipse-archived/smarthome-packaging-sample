@@ -46,7 +46,7 @@ findJvmVersion() {
     echo "Using java: $JAVA_BIN"
     echo "$JAVA_VERSION_OUTPUT"
 
-    JAVA_VERSION=`echo $JAVA_VERSION_OUTPUT | egrep '"([0-9]{1,2}.[0-9]\.(.*[0-9])?).*"' | awk '{print substr($3,2,length($3)-2)}' | sed -e 's;\.;;g'` | sed -e 's;_.*;;g'
+    JAVA_VERSION=`echo $JAVA_VERSION_OUTPUT | egrep '"([0-9]{1,2}.[0-9]\.(.*[0-9])?).*"' | awk '{print substr($3,2,length($3)-2)}' | sed -e 's;\.;;g' | sed -e 's;_.*;;g'`
     # get information about compact profile (1/2/3/fulljre) and Vendor (Oracle, Azul)
     JAVA_COMPACT_PROFILE="fulljre"
     JAVA_VENDOR="Oracle"
@@ -166,7 +166,7 @@ run() {
     setJmxOptions $DEBUG_ENABLED
 
     # Find the concierge framework jar
-    MAIN=$(find framework -name "org.eclipse.concierge-5.0.0*.jar" | sort | tail -1);
+    MAIN=$(find system/org.eclipse.concierge -name "org.eclipse.concierge-5.1.0*.jar" | sort | tail -1);
 
     # show java command when debug enabled
     if [ "$DEBUG_ENABLED" = "true" ] ; then

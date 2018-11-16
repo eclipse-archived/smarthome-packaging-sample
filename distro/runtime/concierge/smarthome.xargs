@@ -1,7 +1,8 @@
 # Concierge start profile for Eclipse SmartHome
 
 # Version configuration
--Dconcierge.version=5.0.0
+# concierge bundles have no unique version anymore
+# we use only major version for bundles
 -Djetty.version=9.3.21
 -Desh.version=0.9.0
 
@@ -30,7 +31,7 @@
 
 # bundle directories
 -Dsystem.dir=${base.dir}/system
--Dconcierge.dir=${base.dir}/bundles
+-Dconcierge.dir=${system.dir}/org.eclipse.concierge
 -Djetty.dir=${system.dir}/org.eclipse.jetty
 -Desh.dir=${system.dir}/org.eclipse.smarthome
 
@@ -91,15 +92,15 @@
 
 
 # OSGi shell. Toggle between concierge shell | Apache Felix GoGo
--istart ${concierge.dir}/org.eclipse.concierge.shell-${concierge.version}*.jar
+-istart ${concierge.dir}/org.eclipse.concierge.shell-*.jar
 # -istart ${system.dir}/org.apache.felix.gogo.runtime-0.*.jar
 # -istart ${system.dir}/org.apache.felix.gogo.command-0.*.jar
 # -istart ${system.dir}/org.apache.felix.gogo.shell-0.*.jar
  
 # Concierge services
--istart ${concierge.dir}/org.eclipse.concierge.service.packageadmin-${concierge.version}*.jar
--istart ${concierge.dir}/org.eclipse.concierge.service.startlevel-${concierge.version}*.jar
--istart ${concierge.dir}/org.eclipse.concierge.service.xmlparser-${concierge.version}*.jar
+-istart ${concierge.dir}/org.eclipse.concierge.service.packageadmin-*.jar
+-istart ${concierge.dir}/org.eclipse.concierge.service.startlevel-*.jar
+-istart ${concierge.dir}/org.eclipse.concierge.service.xmlparser-*.jar
 
 # Metatype Service
 -istart ${system.dir}/org.apache.felix.metatype-1.1.2*.jar
@@ -169,10 +170,10 @@
 -istart ${jetty.dir}/jetty-client-${jetty.version}*.jar
 
 # jUPNP
--istart ${system.dir}/org.jupnp-2.3.0*.jar
+-istart ${system.dir}/org.jupnp-2.*.jar
 
 # jMDNS
--istart ${system.dir}/jmdns-3.5.3*.jar
+-istart ${system.dir}/jmdns-3.*.jar
 
 # Eclipse SmartHome modules
 -istart ${esh.dir}/org.eclipse.smarthome.core-${esh.version}*.jar
