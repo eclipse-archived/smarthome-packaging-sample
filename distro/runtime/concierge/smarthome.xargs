@@ -92,15 +92,15 @@
 
 
 # OSGi shell. Toggle between concierge shell | Apache Felix GoGo
--istart ${concierge.dir}/org.eclipse.concierge.shell-*.jar
+-istart ${concierge.dir}/org.eclipse.concierge.shell-5.*.jar
 # -istart ${system.dir}/org.apache.felix.gogo.runtime-0.*.jar
 # -istart ${system.dir}/org.apache.felix.gogo.command-0.*.jar
 # -istart ${system.dir}/org.apache.felix.gogo.shell-0.*.jar
  
 # Concierge services
--istart ${concierge.dir}/org.eclipse.concierge.service.packageadmin-*.jar
--istart ${concierge.dir}/org.eclipse.concierge.service.startlevel-*.jar
--istart ${concierge.dir}/org.eclipse.concierge.service.xmlparser-*.jar
+-istart ${concierge.dir}/org.eclipse.concierge.service.packageadmin-5.*.jar
+-istart ${concierge.dir}/org.eclipse.concierge.service.startlevel-5.*.jar
+-istart ${concierge.dir}/org.eclipse.concierge.service.xmlparser-5.*.jar
 
 # Metatype Service
 -istart ${system.dir}/org.apache.felix.metatype-1.1.2*.jar

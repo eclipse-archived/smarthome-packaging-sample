@@ -166,7 +166,7 @@ run() {
     setJmxOptions $DEBUG_ENABLED
 
     # Find the concierge framework jar
-    MAIN=$(find system/org.eclipse.concierge -name "org.eclipse.concierge-5.1.0*.jar" | sort | tail -1);
+    MAIN=$(find system/org.eclipse.concierge -name "org.eclipse.concierge-5.*.jar" | sort | tail -1);
 
     # show java command when debug enabled
     if [ "$DEBUG_ENABLED" = "true" ] ; then
