@@ -37,13 +37,13 @@ You can find the created distribution under **/target/smarthome-packaging-sample
 ### The directory structure of the distribution
 * **addons**: Folder for hotdeployment of bundles
 * **runtime**: Contains the runtime
-  * **concierge**: Contains the conciege osgi runtime
+  * **concierge**: Contains the Conciege OSGi runtime
     * **system**: Contains commons and 3rd party bundles
         * **org.eclipse.concierge**: Concierge OSGi Framework and all Concierge bundles
         * **org.eclipse.smarthome**: All SmartHome bundles
-        * **org.eclipse.jetty**: All jetty bundles
+        * **org.eclipse.jetty**: All Jetty bundles
   * **etc**: Quartz configuration, Jetty configuration, keystore
-* **userdata**: This folder is created during the first startup and contains persistent userdata and the osgi storage.
+* **userdata**: This folder is created during the first startup and contains persistent userdata and the OSGi storage.
 
 ## 4. Start runtime
 
