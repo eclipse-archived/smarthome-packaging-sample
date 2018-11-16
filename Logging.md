@@ -4,11 +4,11 @@
 
 Eclipse SmartHome is using [slf4j API](https://www.slf4j.org/) as the common logging API. Based on slf4j architecture different logging backends can be used just by changing deployment and configuration.
 
-This packaging sample is using the java.util.logging backend by default. The following documentation describes what needs to be done to use either java.util.logging (JUL) or logback as logging backend.
+This packaging sample is using the `java.util.logging` backend by default. The following documentation describes what needs to be done to use either `java.util.logging` (JUL) or [logback](https://logback.qos.ch) as logging backend.
 
 ## Use java.util.logging backend
 
-* Change `runtime/concierge/start.sh` to set JAVA_DEBUG_OPTS to JUL configuration
+* Change `runtime/concierge/start.sh` to set `JAVA_DEBUG_OPTS` to JUL configuration
   * `logging_debug.properties` for debugging enabled
   * `logging.properties` for no debugging enabled
 * Add these files to runtime distribution. You can use the [Eclipse SmartHome files](https://github.com/eclipse/smarthome-packaging-sample/blob/master/distro/runtime/etc/logging_debug.properties) as base for it
@@ -34,14 +34,14 @@ JAVA_DEBUG_OPTS="$JAVA_DEBUG_OPTS -Djava.util.logging.config.file=$RUNTIME_FOLDE
 
 * add required files (`slf4j-jdk14-<version>.jar`, `logging*.properties`) to distribution in `src/assemble/concierge.xml` and `pom.xml`
 
-With java.util.logging there is no easy way to use multiple files for different logging output, e.g. put events in its own logfiles.
+With `java.util.logging` there is no easy way to use multiple files for different logging output, e.g. put events in its own logfiles.
 If you want to do that you have to provide a second FileHandler and configure that accordingly.
 For details see http://stackoverflow.com/questions/8248899/java-logging-how-to-redirect-output-to-a-custom-log-file-for-a-logger
 
 
 ## Use logback backend
 
-* Change `runtime/concierge/start.sh` to set JAVA_DEBUG_OPTS to logback configuration
+* Change `runtime/concierge/start.sh` to set `JAVA_DEBUG_OPTS` to logback configuration
   * `logback_debug.xml` for debugging enabled
   * `logback.xml` for no debugging enabled
 * Add these files to runtime distribution. You can use the [Eclipse SmartHome files](https://github.com/eclipse/smarthome/blob/master/distribution/smarthome/logback_debug.xml) as base for it

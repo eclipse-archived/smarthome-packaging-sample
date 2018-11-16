@@ -3,7 +3,7 @@
 This repo contains a sample of how to create a small working runtime package that uses the Eclipse SmartHome framework.
 You can use this example to build an own minimal distribution with a very optimized memory footprint.
 
-It uses [Eclipse Concierge](https://www.eclipse.org/concierge/index.php) as a light-weight OSGi framework.
+It uses [Eclipse Concierge](https://www.eclipse.org/concierge) as a light-weight OSGi framework.
 
 ## 1. Prerequisites - Install Maven
 
@@ -27,27 +27,25 @@ mvn clean install
 ```
 
 The maven build will create an ZIP file with all required components like
-* the concierge runtime
+* the Concierge runtime
 * Eclipse SmartHome bundles
 * 3rd party bundles
 * start scripts
 
-You can find the created distribution under **/target/smarthome-packaging-sample-[version].zip**
+You can find the created distribution under **/target/smarthome-packaging-sample-<version>.zip**
 
 ### The directory structure of the distribution
 * **addons**: Folder for hotdeployment of bundles
 * **runtime**: Contains the runtime
- * **concierge**: Contains the conciege osgi runtime
-    * **bundles**: Additional concierge bundles
-    * **framework**: The Framework
+  * **concierge**: Contains the conciege osgi runtime
     * **system**: Contains commons and 3rd party bundles
-      * **org.eclipse.jetty**: All jetty bundles
-      * **org.eclipse.smarthome**: All SmartHome bundles
- * **etc**: Quartz configuration, Jetty configuration, keystore
+        * **org.eclipse.concierge**: Concierge OSGi Framework and all Concierge bundles
+        * **org.eclipse.smarthome**: All SmartHome bundles
+        * **org.eclipse.jetty**: All jetty bundles
+  * **etc**: Quartz configuration, Jetty configuration, keystore
 * **userdata**: This folder is created during the first startup and contains persistent userdata and the osgi storage.
 
 ## 4. Start runtime
-================
 
 The minimum requirement for running this distribution is:
 * JavaSE 8, or JavaSE Embedded 8, or Azul Zulu-Embedded 8
@@ -56,8 +54,9 @@ The minimum requirement for running this distribution is:
 
 
 Extract the distribution zip file and start the runtime:
+
 ```
-unzip smarthome-packaging-sample-[version].zip
+unzip smarthome-packaging-sample-<version>.zip
 ./start.sh
 ```
 
@@ -71,7 +70,7 @@ Goto: **http://your-host:8080/system/console/**
 
 # Customizing the distribution
 
-## Concierge configuration with XARGS file
+## Concierge configuration with xargs file
 The .xargs file can contain both runtime properties for configuring the framework, as well as a set of framework commands. Properties are declared as `-Dkey=value`. The following commands are allowed:
 
 * `-install <bundle URL> `: installs a bundle from a given bundle URL
@@ -84,7 +83,8 @@ The .xargs file can contain both runtime properties for configuring the framewor
 See for more details: https://www.eclipse.org/concierge/documentation.php#basic
 
 ## How to add further bundles?
-1. Add your bundle as dependecy in the pom.xml. For example:
+1. Add your bundle as dependency in the pom.xml. For example:
+
 ```
   <!-- Eclipse SmartHome dependencies - Bindings -->
         <dependency>
@@ -94,6 +94,7 @@ See for more details: https://www.eclipse.org/concierge/documentation.php#basic
         </dependency>
 ```
 2. Add the install and startup command to XARGS file. For example:
+
 ```
 # Eclipse SmartHome Bindings. Start all bindings here
 -istart ${esh.dir}/org.eclipse.smarthome.binding.wemo-${esh.version}*.jar
@@ -104,12 +105,12 @@ The bundle couldn't be started? Please check the following conditions:
  * Maybe the required import-packages are not satisfied. Add another bundle which exports the required packages.
 
 ## Change the OSGi Shell
-The sample does already include two versions of osgi shell implementations:
+The sample does already include two versions of OSGi shell implementations:
  * Concierge Shell (default)
  * Apache Felix GoGo
  
-If you want using Apache Felix GoGo simple uncomment the GoGo bundles and remove startup of concierge shell 
-like:
+If you want using Apache Felix GoGo simple uncomment the GoGo bundles and remove startup of Concierge shell like:
+
 ```
 # -istart ${concierge.dir}/org.eclipse.concierge.shell-${concierge.version}*.jar
 -istart ${system.dir}/org.apache.felix.gogo.runtime-0.*.jar
